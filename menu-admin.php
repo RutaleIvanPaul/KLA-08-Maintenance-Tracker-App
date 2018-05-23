@@ -1,6 +1,7 @@
 <div class="navbar-homepage">
   <a href="homepage.php">Home</a>
-  <a href="newrequest.php">New Request</a>
+  <a href="newrequests-admin.php">New Requests</a>
+  <a href="oldrequests-admin.php">Old Requests</a>
   <a href="#contact">Contact Us</a>  
   <form action="logout.php" method="post" > 
   <span style="float:right;">
@@ -15,6 +16,8 @@
   </span>
   </form>
 
-  <a href="newrequests-admin.php" style="float:right">Administrator Page</a>
+  <a href="admin.php" style="float:right">Administrator Page</a>
+  <form action=""></form>  
+  
   
 </div>

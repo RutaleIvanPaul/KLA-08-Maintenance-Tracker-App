@@ -63,6 +63,25 @@ a:hover {
   cursor: pointer;
   transition: .5s ease;
 }
+.approve{
+  border:none;
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 25%;
+  text-align: center;
+  cursor: pointer;
+  transition: .5s ease;
+}
+.approve:hover {
+  background: #179b77;
+  color: #ffffff;
+}
+
 .tab-group li a:hover {
   background: #179b77;
   color: #ffffff;
