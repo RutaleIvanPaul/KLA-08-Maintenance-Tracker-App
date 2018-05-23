@@ -1,39 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Sign-Up/Login Form</title>
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
 </head>
-<body class="body-homepage">
+
+<body>
 <?php
 require("menu.php")
 ?>
-<div class="main-homepage">
-  <h1>Fixed Top Menu</h1>
-  <h2>Scroll this page to see the effect</h2>
-  <h2>The navigation bar will stay at the top of the page while scrolling</h2>
+<?php
+require("sidebar.php")
+?>
 
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
-  <p>Some text some text some text some text..</p>
+<div class="main">
+  <div id="content">
+    <div id="left">
+    <div class="entry">
+    <h2><a href="#">Request Title:Request Short Description</a></h2>
+    <p>This will contain the extensive details of any given request in case the user decided to supply any at
+      the point of creating a new request. The next words are just to fill the space just to show what a detailed request 
+      would look like.
+    </p>
+    <p class="meta"><span class="date">May 22,2018</span> Posted by Rutale | Status: Pending, Administrator Comment | No comments</p>
+  </div>
+
+      <div class="entry">
+        <h2><a href="#">Request Title:Request Short Description</a></h2>
+        <p>This will contain the extensive details of any given request in case the user decided to supply any at
+          the point of creating a new request. The next words are just to fill the space just to show what a detailed request 
+          would look like.
+        </p>
+        <p class="meta"><span class="date">May 22,2018</span> Posted by Rutale | Status: Pending, Administrator Comment | No comments</p>
+      </div>
+
+      <div class="entry">
+        <h2><a href="#">Request Title:Request Short Description</a></h2>
+        <p>This will contain the extensive details of any given request in case the user decided to supply any at
+          the point of creating a new request. The next words are just to fill the space just to show what a detailed request 
+          would look like.
+        </p>
+        <p class="meta"><span class="date">May 22,2018</span> Posted by Rutale | Status: Pending, Administrator Comment | No comments</p>
+      </div>
+
+      <div class="entry">
+        <h2><a href="#">Request Title:Request Short Description</a></h2>
+        <p>This will contain the extensive details of any given request in case the user decided to supply any at
+          the point of creating a new request. The next words are just to fill the space just to show what a detailed request 
+          would look like.
+        </p>
+        <p class="meta"><span class="date">May 22,2018</span> Posted by Rutale | Status: Pending, Administrator Comment | No comments</p>
+      </div>
+
+      <div class="entry">
+        <h2><a href="#">Request Title:Request Short Description</a></h2>
+        <p>This will contain the extensive details of any given request in case the user decided to supply any at
+          the point of creating a new request. The next words are just to fill the space just to show what a detailed request 
+          would look like.
+        </p>
+        <p class="meta"><span class="date">May 22,2018</span> Posted by Rutale | Status: Pending, Administrator Comment | No comments</p>
+      </div>
+
+      <div class="entry">
+        <h2><a href="#">Request Title:Request Short Description</a></h2>
+        <p>This will contain the extensive details of any given request in case the user decided to supply any at
+          the point of creating a new request. The next words are just to fill the space just to show what a detailed request 
+          would look like.
+        </p>
+        <p class="meta"><span class="date">May 22,2018</span> Posted by Rutale | Status: Pending, Administrator Comment | No comments</p>
+      </div>
+
+      
+
 </div>
 
+
+
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
 </body>
+
 </html>
