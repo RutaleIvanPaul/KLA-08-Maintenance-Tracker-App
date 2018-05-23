@@ -17,7 +17,17 @@
   </form>
 
   <a href="admin.php" style="float:right">Administrator Page</a>
-  <form action=""></form>  
+  <form action="search.php" method="post" style="float:right;display:inline-block;margin-top:5px;padding-right:10px;">
+  <input type="text" style="width:80%;border-right: none;" placeholder="Filter requests..."/> 
+  <button type="submit"style="float:right;width:20%;margin-top:-38px;
+  padding:9px;
+  background: #1ab188;;
+  color: white;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;"><i class="fa fa-search"></i></button>
+  
+  </form>  
   
   
 </div>

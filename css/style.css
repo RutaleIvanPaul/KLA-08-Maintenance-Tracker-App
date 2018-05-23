@@ -303,7 +303,7 @@ textarea {
 .main-homepage {
   padding: 16px;
   margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
+  height: 1500px; 
 }
 
 .logout:hover, .logout:focus {
@@ -348,10 +348,14 @@ textarea {
   border-bottom:2px solid #abb;
   }
   
-  #content h2 a{
+#content h2 a{
   color:#fff;
   font-weight:normal;
   }
+  /*#content h2 a{
+    color:black;
+    font-weight:normal;
+    }*/
   
   #content h2 a:hover{
   color:#269;
@@ -368,8 +372,7 @@ textarea {
   float:left;
   }
 
-  .entry{
-    
+.entry{
     margin:0 0 20px 0;
     border:2px solid #fff;
     background: rgba(15, 30, 34, 0.9);
@@ -378,18 +381,28 @@ textarea {
     border-radius: 4px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
     }
-    
-    .entry a:hover, .intro a:hover{
+  /*
+   .entry{
+      margin:0 0 20px 0;
+      border:2px solid #fff;
+      background: none;
+      color:black;
+      padding:10px 10px 0 10px;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+      }*/
+
+.entry a:hover, .intro a:hover{
     text-decoration:none;
     padding-bottom:2px;
     }
 
-    .pagenav{
+.pagenav{
       color: #888;
       text-align:center;
       }
 
-      .meta{
+.meta{
         clear:both;
         border-top: 2px solid #ccc;
         padding: 5px 1px 0 0;
@@ -433,4 +446,3 @@ textarea {
   .sidenav a {font-size: 18px;}
 }
 
-      

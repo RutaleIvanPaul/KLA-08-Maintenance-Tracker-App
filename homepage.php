@@ -7,6 +7,22 @@
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <!--<style>
+  .entry{
+    margin:0 0 20px 0;
+    border:2px solid #fff;
+    background: none;
+    color:black;
+    padding:10px 10px 0 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+    }
+
+  #content h2 a{
+  color:black;
+  font-weight:normal;
+  }
+  </style>-->
 
 </head>
 
