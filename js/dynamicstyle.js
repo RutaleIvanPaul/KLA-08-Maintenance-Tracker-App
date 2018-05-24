@@ -6,3 +6,8 @@ function displayCommentBox() {
         x.style.display = "none";
     }
   }
+function loadMenu(){
+    var doc = document.querySelector('link[rel="import"]').import;
+    var text = doc.querySelector('.menu');
+    document.body.appendChild(text.cloneNode(true));
+}
