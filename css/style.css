@@ -381,16 +381,6 @@ textarea {
     border-radius: 4px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
     }
-  /*
-   .entry{
-      margin:0 0 20px 0;
-      border:2px solid #fff;
-      background: none;
-      color:black;
-      padding:10px 10px 0 10px;
-      border-radius: 4px;
-      box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-      }*/
 
 .entry a:hover, .intro a:hover{
     text-decoration:none;
@@ -445,4 +435,3 @@ textarea {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
