@@ -17,6 +17,7 @@ a {
   color: #1ab188;
   transition: .5s ease;
 }
+
 a:hover {
   color: #179b77;
 }
@@ -45,11 +46,13 @@ a:hover {
   padding: 0;
   margin: 0 0 40px 0;
 }
+
 .tab-group:after {
   content: "";
   display: table;
   clear: both;
 }
+
 .tab-group li a {
   display: block;
   text-decoration: none;
@@ -63,6 +66,7 @@ a:hover {
   cursor: pointer;
   transition: .5s ease;
 }
+
 .approve{
   border:none;
   display: block;
@@ -77,6 +81,7 @@ a:hover {
   cursor: pointer;
   transition: .5s ease;
 }
+
 .approve:hover {
   background: #179b77;
   color: #ffffff;
@@ -86,6 +91,7 @@ a:hover {
   background: #179b77;
   color: #ffffff;
 }
+
 .tab-group .active a {
   background: #1ab188;
   color: #ffffff;
@@ -129,6 +135,7 @@ label {
   pointer-events: none;
   font-size: 22px;
 }
+
 label .req {
   margin: 2px;
   color: #1ab188;
@@ -140,6 +147,7 @@ label.active {
   left: 2px;
   font-size: 14px;
 }
+
 label.active .req {
   opacity: 0;
 }
@@ -182,11 +190,13 @@ textarea {
   display: table;
   clear: both;
 }
+
 .top-row > div {
   float: left;
   width: 48%;
   margin-right: 4%;
 }
+
 .top-row > div:last-child {
   margin: 0;
 }
@@ -310,14 +320,13 @@ textarea {
   background: none
 }
 
-
 #menu{
   height:71px;
   padding-top:35px;
   text-align: right;
-  }
+}
   
-  #menu a{
+#menu a{
   margin:0;
   height:100px;
   padding:35px 6px 41px 6px;
@@ -325,52 +334,52 @@ textarea {
   font-weight:normal;
   letter-spacing:-1px;
   color: #888;
-  }
+}
   
-  #menu a:hover{
+#menu a:hover{
   color:#269;
   text-decoration:none;
   padding:35px 5px 41px 5px;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
-  }
+}
   
-  #content{
+#content{
   margin-top:50px;
   margin-left:100px; 
   width:100%;
   clear:both;
-  }
+}
   
-  #content h2{
+#content h2{
   margin:0 0 10px 0;
   color:#555;
   border-bottom:2px solid #abb;
-  }
+}
   
 #content h2 a{
   color:#fff;
   font-weight:normal;
-  }
+}
   /*#content h2 a{
     color:black;
     font-weight:normal;
     }*/
   
-  #content h2 a:hover{
+#content h2 a:hover{
   color:#269;
   text-decoration:none;
   background:none;
-  }
+}
   
-  #content p{
+#content p{
   margin:0 0.5em 1.2em 0.5em;
-  }
+}
   
-  #left{
+#left{
   width:68%;
   float:left;
-  }
+}
 
 .entry{
     margin:0 0 20px 0;
@@ -380,17 +389,17 @@ textarea {
     padding:10px 10px 0 10px;
     border-radius: 4px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-    }
+}
 
 .entry a:hover, .intro a:hover{
     text-decoration:none;
     padding-bottom:2px;
-    }
+}
 
 .pagenav{
       color: #888;
       text-align:center;
-      }
+}
 
 .meta{
         clear:both;
@@ -400,7 +409,7 @@ textarea {
         text-align:right;
         font-size:0.9em;
         color: #567;
-        }
+}
         
 
 
