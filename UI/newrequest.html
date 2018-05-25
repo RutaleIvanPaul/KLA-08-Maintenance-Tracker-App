@@ -1,6 +1,6 @@
 <!DOCTYPE html>
   <html lang="en" >
-
+  <!--Head section with most important styles and js resources(Index.js and style.css)-->
   <head>
     <meta charset="UTF-8">
     <title>New request</title>
@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="import" href="menu.html">
+    <!--Following JS file important for the dynamic placement of nav and sidebar-->
     <script src="js/dynamicstyle.js"></script>
     <style>
+      /*Internal CSS had to be placed in head section due to conflicts*/
       .form {
         background: rgba(15, 30, 34, 0.9);
         padding: 40px;
@@ -31,15 +33,17 @@
     </style>
 
   </head>
-
+  <!--JS function in the body tag loads the nav and sidebar-->
   <body onload="loadMenu()">
+    <!--Main section of page begins at this div-->
+    <!--Form to input new requests-->
     <div class="form animated fadeIn" >
       <div>
         <ul class="tab-group">
           <li class="tab active"><a href="#signup">Summarised</a></li>
           <li class="tab"><a href="#login">Details</a></li>
         </ul>
-        
+        <!--Beginning of form content-->
         <div class="tab-content">
           <div id="signup">   
             <h1>Short Request Summary</h1>
@@ -63,8 +67,8 @@
             
             </form>
 
-          </div>
-          
+          </div><!--end of first part of the form-->
+          <!--Details form-->
           <div id="login">   
             <h1>Need to give more details?</h1>
             <form action="submitrequest.php" method="post">

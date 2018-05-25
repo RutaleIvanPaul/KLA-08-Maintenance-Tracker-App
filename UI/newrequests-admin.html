@@ -1,6 +1,6 @@
 <!DOCTYPE html>
   <html lang="en" >
-
+  <!--Head section with most important styles and js resources(Index.js and style.css)-->
     <head>
       <meta charset="UTF-8">
       <title>New requests</title>
@@ -9,8 +9,10 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="css/style.css">
       <link rel="import" href="menu-admin.html">
+      <!--Following JS file important for the dynamic placement of nav and sidebar-->
       <script src="js/dynamicstyle.js"></script>
       <style>
+        /*Styles for the log out button. Conflicting css required they be placed here*/
         .tab-group li a {
           width: 25%; 
         }
@@ -44,11 +46,15 @@
       </style>
 
     </head>
-
+  <!--JS function in the body tag loads the nav and sidebar-->
   <body onload="loadMenu()">
+    <!--Main section of page begins at this div-->
     <div class="main">
       <div id="content">
         <div id="left">
+          <!--Entry divs contain the different request entries-->
+                <!--These divs will eventually be removed as the entries are to be dynamically added to
+                the page-->
           <div class="entry">
             <h2><a href="#">Request Title:Request Short Description</a></h2>
             <p>This will contain the extensive details of any given request in case the user decided to supply any at
