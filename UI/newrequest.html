@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Head section with most important styles and js resources(Index.js and style.css)-->
+
+<head>
+	<meta charset="UTF-8">
+	<title>New request</title>
+	<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="import" href="menu.html">
+	<!--Following JS file important for the dynamic placement of nav and sidebar-->
+	<script src="js/dynamicstyle.js"></script>
+
+</head>
+<!--JS function in the body tag loads the nav and sidebar-->
+
+<body onload="loadMenu()">
+	<!--Main section of page begins at this div-->
+	<!--Form to input new requests-->
+	<div class="form3 animated fadeIn">
+		<div>
+			<ul class="tab-group">
+				<li class="tab active"><a href="#signup">Summarised</a></li>
+				<li class="tab"><a href="#login">Details</a></li>
+			</ul>
+			<!--Beginning of form content-->
+			<div class="tab-content">
+				<div id="signup">
+					<h1>Short Request Summary</h1>
+					<form action="submitrequest.php" method="post">
+
+						<div class="field-wrap">
+							<label>
+                  Request Title<span class="req">*</span>
+                </label>
+							<input type="text" required autocomplete="off" />
+						</div>
+
+						<div class="field-wrap">
+							<label>
+                  Short Description<span class="req">*</span>
+                </label>
+							<input type="text" required autocomplete="off" />
+						</div>
+
+						<input type="submit" class="button button-block" />
+
+					</form>
+
+				</div>
+				<!--end of first part of the form-->
+				<!--Details form-->
+				<div id="login">
+					<h1>Need to give more details?</h1>
+					<form action="submitrequest.php" method="post">
+						<div class="field-wrap">
+							<textarea name="" id="" cols="30" rows="5"></textarea>
+						</div>
+
+						<input type="submit" class="button button-block" />
+
+					</form>
+
+				</div>
+
+			</div>
+			<!-- tab-content -->
+		</div>
+	</div>
+	<!-- /form -->
+
+
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

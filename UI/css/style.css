@@ -41,6 +41,15 @@ a:hover {
   /*box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);*/
 }
 
+.form3 {
+  background: rgba(15, 30, 34, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 60px 80px 120px 240px;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
 .tab-group {
   list-style: none;
   padding: 0;
@@ -53,7 +62,7 @@ a:hover {
   clear: both;
 }
 
-.tab-group li a {
+.tab-group li a, .form .tab-group li a {
   display: block;
   text-decoration: none;
   padding: 15px;
@@ -438,7 +447,36 @@ textarea {
   color: #f1f1f1;
 }
 
+#searchform{
+  float:right;
+  display:inline-block;
+  margin-top:5px;
+  padding-right:10px;
+}
 
+#searchButton{
+  float:right;width:20%;margin-top:-38px;
+  padding:9px;
+  background: #1ab188;;
+  color: white;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+#logoutButton{
+  background: #1ab188;
+  border:none;
+  padding:none;
+  text-align:center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.tab-group li a {
+  width: 25%; 
+}
 
 @media screen and (max-height: 400px) {
   .sidenav {padding-top: 15px;}
