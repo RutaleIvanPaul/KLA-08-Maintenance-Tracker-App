@@ -62,7 +62,7 @@ a:hover {
   clear: both;
 }
 
-.tab-group li a, .form .tab-group li a {
+.tab-group li a{
   display: block;
   text-decoration: none;
   padding: 15px;
@@ -474,7 +474,7 @@ textarea {
   font-size: 17px;
 }
 
-.tab-group li a {
+.entry .tab-group li a {
   width: 25%; 
 }
 
