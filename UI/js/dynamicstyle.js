@@ -12,3 +12,4 @@ function loadMenu(){
     var text = doc.querySelector('.menu');
     document.body.appendChild(text.cloneNode(true));
 }
+
