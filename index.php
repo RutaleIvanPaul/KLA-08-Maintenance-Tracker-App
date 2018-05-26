@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
  
   
-      <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
   
 </head>
@@ -26,7 +26,7 @@
         <div id="signup">   
           <h1>Sign Up Here</h1>
           
-          <form action="/" method="post">
+          <form action="signup.php" method="post">
           
           <div class="top-row">
             <div class="field-wrap">
@@ -58,7 +58,7 @@
             <input type="password"required autocomplete="off"/>
           </div>
           
-          <button type="submit" class="button button-block"/>Create account</button>
+          <input type="submit" class="button button-block"/>
           
           </form>
 
@@ -67,7 +67,7 @@
         <div id="login">   
           <h1>Log in Here</h1>
           
-          <form action="/" method="post">
+          <form action="login.php" method="post">
           
             <div class="field-wrap">
             <label>
@@ -85,7 +85,7 @@
           
           <p class="forgot"><a href="#">Forgot Password?</a></p>
           
-          <button class="button button-block"/>Log In</button>
+          <input type="submit" class="button button-block"/>
           
           </form>
 
