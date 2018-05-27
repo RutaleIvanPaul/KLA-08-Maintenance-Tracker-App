@@ -27,4 +27,7 @@ function displayFormLogin() {
 
 }
 
+function redirectHome(){
+    window.location.replace("homepage.html");
+}
 
