@@ -505,3 +505,11 @@ textarea {
 .logoutSpan{
   float:right;
 }
+
+#login{
+  display:none; 
+}
+
+#signup{
+  display: block;
+}

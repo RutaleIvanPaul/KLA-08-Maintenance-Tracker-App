@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--Head section with most important styles and js resources(Index.js and style.css)-->
 
 <head>
 	<meta charset="UTF-8">
@@ -8,6 +7,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="js/dynamicstyle.js"></script>
 
 </head>
 
@@ -16,8 +16,8 @@
 	<div class="form">
 		<!--Tab group for log in and sign up tabs-->
 		<ul class="tab-group">
-			<li class="tab active"><a href="#signup">Sign Up</a></li>
-			<li class="tab"><a href="#login">Log In</a></li>
+			<li class="tab active"><a href="#signup" onclick="displayFormSignup()">Sign Up</a></li>
+			<li class="tab"><a href="#login" onclick="displayFormLogin()">Log In</a></li>
 		</ul>
 		<!--Tab content div holds the major form content-->
 		<div class="tab-content">
@@ -27,35 +27,27 @@
 				<form action="index.html" method="post">
 					<div class="top-row">
 						<div class="field-wrap">
-							<label>
-                      First Name<span class="req">*</span>
-                    </label>
-							<input type="text" required autocomplete="off" />
+							
+							<input type="text" placeholder ="First Name" required autocomplete="off" />
 						</div>
 
 						<div class="field-wrap">
-							<label>
-                      Last Name<span class="req">*</span>
-                    </label>
-							<input type="text" required autocomplete="off" />
+							
+							<input type="text" placeholder="Last Name" required autocomplete="off" />
 						</div>
 					</div>
 
 					<div class="field-wrap">
-						<label>
-                    Email Address<span class="req">*</span>
-                  </label>
-						<input type="email" required autocomplete="off" />
+						
+						<input type="email" placeholder="Email Address" required autocomplete="off" />
 					</div>
 
 					<div class="field-wrap">
-						<label>
-                    Set A Password<span class="req">*</span>
-                  </label>
-						<input type="password" required autocomplete="off" />
+						
+						<input type="password" placeholder="Set A Password" required autocomplete="off" />
 					</div>
 
-					<input type="submit" class="button button-block" />
+					<button class="button button-block" >SUBMIT </button>
 
 				</form>
 
@@ -66,17 +58,13 @@
 				<h1>Log in Here</h1>
 				<form action="homepage.html" method="post">
 					<div class="field-wrap">
-						<label>
-                      Email Address<span class="req">*</span>
-                    </label>
-						<input type="email" required autocomplete="off" />
+						
+						<input type="email" placeholder="Email Address" required autocomplete="off" />
 					</div>
 
 					<div class="field-wrap">
-						<label>
-                      Password<span class="req">*</span>
-                    </label>
-						<input type="password" required autocomplete="off" />
+						
+						<input type="password" placeholder="Password" required autocomplete="off" />
 					</div>
 
 					<p class="forgot"><a href="#">Forgot Password?</a></p>
@@ -94,15 +82,16 @@
 	<!-- /form -->
 
 	<div class="form2 animated fadeIn">
-		<button type="submit" class=" button button-block field-wrap" />maintenance tracker</button>
+		<button type="submit" class=" button button-block field-wrap" >maintenance tracker</button>
 		<h1 class="bigwords">Welcome to the Maintenance Tracker Application</h1>
 		<h1 class="smallwords">For your Maintenance needs</h1>
-
 	</div>
+	
 	<!-- /form -->
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	<script src="js/index.js"></script>
+	
 
 </body>
 
 </html>
+

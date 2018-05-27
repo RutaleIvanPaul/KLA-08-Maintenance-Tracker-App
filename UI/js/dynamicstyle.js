@@ -7,9 +7,24 @@ function displayCommentBox() {
     }
 }
 
-function loadMenu(){
+function loadMenu() {
     var doc = document.querySelector('link[rel="import"]').import;
     var text = doc.querySelector('.menu');
     document.body.appendChild(text.cloneNode(true));
 }
+
+function displayFormSignup() {
+    var signup = document.getElementById("signup");
+    document.getElementById("login").style.display = "none";
+    signup.style.display = "block";
+
+}
+
+function displayFormLogin() {
+    var login = document.getElementById("login");
+    document.getElementById("signup").style.display = "none";
+    login.style.display = "block";
+
+}
+
 
