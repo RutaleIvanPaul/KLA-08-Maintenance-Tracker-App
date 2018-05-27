@@ -314,7 +314,8 @@ textarea {
   font-size: 17px;
 }
 
-.navbar-homepage a span{
+.navbar-homepage span a{
+  padding:0px;
   float: left;
   display: block;
   color: #f2f2f2;
