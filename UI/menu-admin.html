@@ -6,17 +6,17 @@
 		<a href="newrequests-admin.html">New Requests</a>
 		<a href="oldrequests-admin.html">Old Requests</a>
 		<a href="#contact">Contact Us</a>
-		<form action="index.html" method="post">
-			<span style="float:right;">
-      <input type="submit" id="logoutButton" value = "Log Out"/>
-    </span>
-		</form>
 
-		<a href="newrequests-admin.html" style="float:right">Administrator Page</a>
-		<form action="newrequests-admin.html" method="post" id="searchform">
-			<input type="text" style="width:80%;border-right: none;" placeholder="Filter requests..." />
-			<button type="submit" id="searchButton"><i class="fa fa-search"></i></button>
-		</form>
+		<span class="logoutSpan">
+			<button id="logoutButton"><a href="index.html">Log Out</a></button>
+		</span>
+
+
+		<a href="newrequests-admin.html" id="adminpage">Administrator Page</a>
+		<span id="searchform">
+			<input type="text" placeholder="Filter requests..." />
+			<button  id="searchButton"><i class="fa fa-search"></i></button>
+		</span>
 	</div>
 	<!--/nav bar-->
 
