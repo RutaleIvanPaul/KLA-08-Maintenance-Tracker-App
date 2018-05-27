@@ -324,6 +324,15 @@ textarea {
   font-size: 17px;
 }
 
+.navbar-homepage form input{
+  width:80%;
+  border-right: none;
+}
+
+#adminpage{
+  float:right
+}
+
 .navbar-homepage a:hover {
   background: #1ab188;
   color: black;
