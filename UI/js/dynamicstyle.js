@@ -39,6 +39,6 @@ function displayFormLogin() {
 
 function redirectHome() {
 	/*Redirect to homepage.html */
-	window.location.replace("homepage.html");
+	window.location.replace("../user/homepage.html");
 }
 
