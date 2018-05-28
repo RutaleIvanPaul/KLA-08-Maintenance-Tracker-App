@@ -45,10 +45,6 @@ All versioning for the project is done on my [github repository](https://github.
 
 * **Rutale Ivan Paul** - *Initial work* 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 * Hats off to the [Andela](https://andela.com/) team for the constant and relentless support in overcoming the multiple hurdles up until this point.
