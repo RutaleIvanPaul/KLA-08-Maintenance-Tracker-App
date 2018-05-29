@@ -62,7 +62,7 @@ a:hover {
   clear: both;
 }
 
-.tab-group li a, .form .tab-group li a {
+.tab-group li a{
   display: block;
   text-decoration: none;
   padding: 15px;
@@ -314,6 +314,25 @@ textarea {
   font-size: 17px;
 }
 
+.navbar-homepage span a{
+  padding:0px;
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar-homepage form input{
+  width:80%;
+  border-right: none;
+}
+
+#adminpage{
+  float:right
+}
+
 .navbar-homepage a:hover {
   background: #1ab188;
   color: black;
@@ -474,11 +493,23 @@ textarea {
   font-size: 17px;
 }
 
-.tab-group li a {
+.entry .tab-group li a {
   width: 25%; 
 }
 
 @media screen and (max-height: 400px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+.logoutSpan{
+  float:right;
+}
+
+#login{
+  display:none; 
+}
+
+#signup{
+  display: block;
 }
