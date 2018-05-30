@@ -4,7 +4,7 @@ import json
 
 import apifunctions
 
-BASE_URL = 'http://127.0.0.1:5000/api/v1.0/requests'
+BASE_URL = 'http://127.0.0.1:5000/api/v1/requests'
 BAD_ITEM_URL = '{}/5'.format(BASE_URL)
 GOOD_ITEM_URL = '{}/3'.format(BASE_URL)
 

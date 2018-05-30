@@ -42,12 +42,12 @@ def bad_request(error):
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
 
-@app.route('/api/v1.0/requests', methods=['GET'])
+@app.route('/api/v1/requests', methods=['GET'])
 def get_requests():
     return jsonify({'requests': requests}), 200
 
 
-@app.route('/api/v1.0/requests/<int:id>', methods=['GET'])
+@app.route('/api/v1/requests/<int:id>', methods=['GET'])
 def _get_request(id):
     request = _get_request(id)
     if not request:
@@ -55,7 +55,7 @@ def _get_request(id):
     return jsonify({'request': request})
 
 
-@app.route('/api/v1.0/requests', methods=['POST'])
+@app.route('/api/v1/requests', methods=['POST'])
 def create_request():
     if not request.json or 'title' not in request.json or 'description' not in request.json:
         abort(400)
@@ -72,7 +72,7 @@ def create_request():
     return jsonify({'request': request}), 201
 
 
-@app.route('/api/v1.0/requests/<int:id>', methods=['PUT'])
+@app.route('/api/v1/requests/<int:id>', methods=['PUT'])
 def modify_request(id):
     request = _get_request(id)
     if len(request) == 0:
