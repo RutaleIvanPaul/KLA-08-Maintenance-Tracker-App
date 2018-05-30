@@ -1,59 +1,97 @@
+from copy import deepcopy
 import unittest
-import flaskapi
-import requests
 import json
+
 import apifunctions
 
-class TestApi(unittest.TestCase):
+BASE_URL = 'http://127.0.0.1:5000/api/v1.0/requests'
+BAD_ITEM_URL = '{}/5'.format(BASE_URL)
+GOOD_ITEM_URL = '{}/3'.format(BASE_URL)
 
-     def setUp(self):
-        """Define test variables and initialize app."""
+
+class TestFlaskApi(unittest.TestCase):
+
+    def setUp(self):
+        self.backup_requests = deepcopy(app.requests)  # no references!
+        self.app = app.app.test_client()
         self.app.testing = True
-        self.app = create_app(config_name="testing")
-        self.client = self.app.test_client
-        self.request = {'Request Title':'Request Description'}
 
-    def test_createRequest(self):
-        """Test whether the API function enables user to create a request"""
-        res = self.client().post('/m-tracker/', data=self.request)
-        self.assertEqual(res.status_code, 201)
-        self.assertIn('Request Description', str(res.data))
-    
-    def test_getRequest(self):
-        """Test whether the API fucntion enables user to get a given request"""
-        rv = self.client().post('/m-tracker/', data=self.request)
-        self.assertEqual(rv.status_code, 201)
-        result_in_json = json.loads(rv.data.decode('utf-8').replace("'", "\""))
-        result = self.client().get(
-            '/m-tracker/{}'.format(result_in_json['id']))
-        self.assertEqual(result.status_code, 200)
-        self.assertIn('Request Description', str(result.data))
+    def test_get_all_requests(self):
+        response = self.app.get(BASE_URL)
+        data = json.loads(response.get_data())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(data['requests']), 3)
 
-    def test_getRequests(self):
-        """Test whether the API function enables user to get requests for all logged in users"""
-		res = self.client().post('/m-tracker/', data=self.request)
-        self.assertEqual(res.status_code, 201)
-        res = self.client().get('/m-tracker/')
-        self.assertEqual(res.status_code, 200)
-        self.assertIn('Request Description', str(res.data))
+    def test_get_one_request(self):
+        response = self.app.get(BASE_URL)
+        data = json.loads(response.get_data())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['requests'][0]['title'], 'laptop screen blacked out')
 
-    def test_modifyRequest(self):
-        """Test whether the API function enables user to modify given request"""
-		rv = self.client().post(
-            '/m-tracker/',
-            data={'Request Title': 'Request Description'})
-        self.assertEqual(rv.status_code, 201)
-        rv = self.client().put(
-            '/m-tracker/1',
-            data={
-                'Request Title': 'New Request Description Again'"
-            })
-        self.assertEqual(rv.status_code, 200)
-        results = self.client().get('/m-tracker/1')
-        self.assertIn('New Request Description Again', str(results.data))
+    def test_item_not_exist(self):
+        response = self.app.get(BAD_ITEM_URL)
+        self.assertEqual(response.status_code, 404)
 
-    
+    def test_post_request(self):
+        # missing value field = bad
+        request = {"name": "some_item"}
+        response = self.app.post(BASE_URL,
+                                 data=json.dumps(item),
+                                 content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        # value field cannot take str
+		request = {"title": "screen", "description": 200}
+        response = self.app.post(BASE_URL,
+                                 data=json.dumps(item),
+                                 content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        # valid: both required fields, value takes string
+        request = {"title": "screen", "description": 'string'}
+        response = self.app.post(BASE_URL,
+                                 data=json.dumps(item),
+                                 content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+        data = json.loads(response.get_data())
+        self.assertEqual(data['request']['id'], 4)
+        self.assertEqual(data['request']['title'], 'screen')
+        # cannot add request with same title again
+        request = {"title": "screen", "description":'string'}
+        response = self.app.post(BASE_URL,
+                                 data=json.dumps(item),
+                                 content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_modify_request(self):
+        request = {"description":"new description"}
+        response = self.app.put(GOOD_ITEM_URL,
+                                data=json.dumps(item),
+                                content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.get_data())
+        self.assertEqual(data['request']['description'], "new description")
+        # proof need for deepcopy in setUp: update app.items should not affect self.backup_items
+        # this fails when you use shallow copy
+        self.assertEqual(self.backup_items[2]['description'], 'pc over heats even on low activity')  # org value
+
+    def test_modify_error(self):
+        # cannot edit non-existing item
+        request = {"value": 'string does not exist'}
+        response = self.app.put(BAD_ITEM_URL,
+                                data=json.dumps(item),
+                                content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+        # value field cannot take int
+        request = {"description": 30}
+        response = self.app.put(GOOD_ITEM_URL,
+                                data=json.dumps(item),
+                                content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+
+    def tearDown(self):
+        # reset app.items to initial state
+        app.items = self.backup_items
+
+
 if __name__ == "__main__":
     unittest.main()
-
-
