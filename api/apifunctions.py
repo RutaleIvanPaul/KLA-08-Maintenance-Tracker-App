@@ -5,19 +5,43 @@ BAD_REQUEST = 'Bad request'
 
 app = Flask(__name__)
 
+users = [
+    {
+        'userID':1,
+        'username':'Ivan',
+    },
+    {
+        'userID':2,
+        'username':'Paul',
+    },
+    {
+        'userID':3,
+        'username':'Rutale',
+    },
+     {
+        'userID':4,
+        'username':'Francis',
+    }
+]
+
+loggedIn = [2,4]
+
 requests = [
     {
         'id': 1,
+        'userID':2,
         'title': 'laptop screen blacked out',
         'description':'the screen just suddenly blacked out'
     },
      {
         'id': 2,
+        'userID':4,
         'title': 'phone screen cracked',
         'description':'the phone fell down'
     },
      {
         'id': 3,
+        'userID':3,
         'title': 'pc over heat',
         'description':'pc over heats even on low activity'
     },
@@ -27,10 +51,17 @@ requests = [
 def _get_request(id):
     return [request for request in requests if request['id'] == id]
 
+def _get_user_request(userID):
+    return [request for request in requests if request['userID'] == userID]
 
 def _record_exists(title):
     return [request for request in requests if request["title"] == title]
 
+def is_logged_in(id):
+    if id in loggedIn:
+        return True
+    else:
+        return False
 
 @app.errorhandler(404)
 def not_found(error):
@@ -42,13 +73,16 @@ def bad_request(error):
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
 
-@app.route('/api/v1/requests', methods=['GET'])
-def get_requests():
-    return jsonify({'requests': requests}), 200
-
+@app.route('/api/v1/requests/<int:userid>', methods=['GET'])
+def get_requests(userid):
+    if is_logged_in(userid):
+        logged_in_user_requests = _get_user_request(userid)
+        return jsonify({'requests': logged_in_user_requests}), 200
+    else:
+        return jsonify({'error':'User is not logged in'}), 404
 
 @app.route('/api/v1/requests/<int:id>', methods=['GET'])
-def _get_request(id):
+def get_request(id):
     request = _get_request(id)
     if not request:
         abort(404)
@@ -89,4 +123,4 @@ def modify_request(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="localhost", port=8085, debug=True)
