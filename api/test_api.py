@@ -6,7 +6,6 @@ import apifunctions
 
 BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 BAD_ITEM_URL = '{}/5'.format(BASE_URL)
-GOOD_ITEM_URL = '{}/3'.format(BASE_URL)
 
 
 class TestApi(unittest.TestCase):
@@ -39,7 +38,7 @@ class TestApi(unittest.TestCase):
 
     def test_modify_request(self):
         request = {"description":"New Description"}
-        response = self.app.put(GOOD_ITEM_URL,
+        response = self.app.put(BASE_URL+"/2",
                                 data=json.dumps(request),
                                 content_type='application/json')
         self.assertEqual(response.status_code, 200)
