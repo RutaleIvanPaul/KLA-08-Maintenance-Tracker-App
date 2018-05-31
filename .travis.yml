@@ -7,3 +7,8 @@ install:
 # command to run tests
 script:
   - pytest api/test_api.py 
+  - coverage report
+
+# push report to coveralls.io
+after_success:
+- coveralls
