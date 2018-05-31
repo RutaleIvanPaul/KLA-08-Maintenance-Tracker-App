@@ -9,7 +9,7 @@ BAD_ITEM_URL = '{}/5'.format(BASE_URL)
 GOOD_ITEM_URL = '{}/3'.format(BASE_URL)
 
 
-class TestFlaskApi(unittest.TestCase):
+class TestApi(unittest.TestCase):
 
     def setUp(self):
         self.app = apifunctions.app.test_client()
