@@ -110,20 +110,20 @@ def create_request():
     return jsonify({'request': user_request}), 201
 
 
-''' @app.route('/api/v1/requests/<int:id>', methods=['PUT'])
+@app.route('/api/v1/requests/<int:id>', methods=['PUT'])
 def modify_request(id):
-    request = _get_request(id)
-    if len(request) == 0:
+    user_request = _get_request(id)
+    if len(user_request) == 0:
         abort(404)
     if not request.json:
         abort(400)
-    title = request.json.get('title', requests[0]['title'])
-    description = request.json.get('description', requests[0]['description'])
+    title = request.json.get('title', user_requests[id]['title'])
+    description = request.json.get('description', user_requests[id]['description'])
     if type(description) is int:
         abort(400)
-    requests[0]['title'] = title
-    requests[0]['description'] = description
-    return jsonify({'request': requests[0]}), 200 '''
+    user_requests[id]['title'] = title
+    user_requests[id]['description'] = description
+    return jsonify({'request': user_requests[id]}), 200
 
 
 if __name__ == '__main__':

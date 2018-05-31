@@ -24,27 +24,27 @@ class TestApi(unittest.TestCase):
 
     def test_create_request(self):
         #no missing values
-        request = {
+        user_request = {
         'id': 5,
         'userID':5,
         'title': 'pc over heat',
         'description':'pc over heats even on low activity'
     }
         response = self.app.post(BASE_URL,
-                                 data=json.dumps(request),
+                                 data=json.dumps(user_request),
                                  content_type='application/json')
         self.assertEqual(response.status_code, 201)
 
-    ''' def test_modify_request(self):
-        request = {"description":"New Description"}
+    def test_modify_request(self):
+        modify_request = {"title":"New title","description":"New Description"}
         response = self.app.put(BASE_URL+"/2",
-                                data=json.dumps(request),
+                                data=json.dumps(modify_request),
                                 content_type='application/json')
-        self.assertEqual(response.status_code, 200) '''
+        self.assertEqual(response.status_code, 200)
 
     def tearDown(self):
         # reset app.requests to initial state
-        apifunctions.requests = self.backup_requests
+        apifunctions.user_requests = self.backup_requests
 
 
 if __name__ == "__main__":
