@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort, make_response, request
-
+assert request
 NOT_FOUND = 'Not found'
 BAD_REQUEST = 'Bad request'
 
