@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort, make_response, request
-assert request
+
 NOT_FOUND = 'Not found'
 BAD_REQUEST = 'Bad request'
 
@@ -26,7 +26,7 @@ users = [
 
 loggedIn = [2,4]
 
-requests = [
+user_requests = [
     {
         'id': 1,
         'userID':2,
@@ -49,13 +49,13 @@ requests = [
 
 
 def _get_request(id):
-    return [request for request in requests if request['id'] == id]
+    return [user_request for user_request in user_requests if user_request['id'] == id]
 
-def _get_user_request(userID):
-    return [request for request in requests if request['userID'] == userID]
+def _get_all_user_requests(userID):
+    return [user_request for user_request in user_requests if user_request['userID'] == userID]
 
 def _record_exists(title):
-    return [request for request in requests if request["title"] == title]
+    record = [user_request for user_request in user_requests if user_request["title"] == title]
 
 def is_logged_in(id):
     if id in loggedIn:
@@ -74,26 +74,27 @@ def bad_request(error):
 
 
 @app.route('/api/v1/requests/<int:userid>', methods=['GET'])
-def get_requests(userid):
+def get_all_requests(userid):
     if is_logged_in(userid):
-        logged_in_user_requests = _get_user_request(userid)
+        logged_in_user_requests = _get_all_user_requests(userid)
         return jsonify({'requests': logged_in_user_requests}), 200
     else:
         return jsonify({'error':'User is not logged in'}), 404
 
-@app.route('/api/v1/requests/<int:id>', methods=['GET'])
-def get_request(id):
-    request = _get_request(id)
-    if not request:
+@app.route('/api/v1/requests/<int:userid>/<int:requestid>', methods=['GET'])
+def get_particular_request(userid,requestid):
+    if is_logged_in(userid):
+        particular_request = _get_request(id)
+    if not particular_request:
         abort(404)
-    return jsonify({'request': request})
+    return jsonify({'request': particular_request})
 
 
 @app.route('/api/v1/requests', methods=['POST'])
 def create_request():
     if not request.json or 'title' not in request.json or 'description' not in request.json:
         abort(400)
-    request_id = requests[-1].get("id") + 1
+    user_request_id = user_requests[-1].get("id") + 1
     userID = request.json.get('userID')
     title = request.json.get('title')
     description = request.json.get('description')
@@ -103,13 +104,13 @@ def create_request():
 
     if type(description) is int:
         abort(400)
-    request = {"id": request_id,"userID":userID, "title": title,
+    user_request = {"id": user_request_id,"userID":userID, "title": title,
             "description": description}
-    requests.append(request)
-    return jsonify({'request': request}), 201
+    user_requests.append(request)
+    return jsonify({'request': user_request}), 201
 
 
-@app.route('/api/v1/requests/<int:id>', methods=['PUT'])
+''' @app.route('/api/v1/requests/<int:id>', methods=['PUT'])
 def modify_request(id):
     request = _get_request(id)
     if len(request) == 0:
@@ -122,7 +123,7 @@ def modify_request(id):
         abort(400)
     requests[0]['title'] = title
     requests[0]['description'] = description
-    return jsonify({'request': requests[0]}), 200
+    return jsonify({'request': requests[0]}), 200 '''
 
 
 if __name__ == '__main__':

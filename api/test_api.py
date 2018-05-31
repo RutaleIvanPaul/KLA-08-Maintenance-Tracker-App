@@ -11,7 +11,7 @@ class TestApi(unittest.TestCase):
 
     def setUp(self):
         self.app = apifunctions.app.test_client()
-        self.backup_requests = deepcopy(apifunctions.requests)  # no references!
+        self.backup_requests = deepcopy(apifunctions.user_requests)  # no references!
         self.app.testing = True
     
     def test_get_requests(self):
@@ -22,7 +22,7 @@ class TestApi(unittest.TestCase):
         response = self.app.get(BASE_URL+"/2")
         self.assertEqual(response.status_code, 200)
 
-    ''' def test_create_request(self):
+    def test_create_request(self):
         #no missing values
         request = {
         'id': 5,
@@ -33,14 +33,14 @@ class TestApi(unittest.TestCase):
         response = self.app.post(BASE_URL,
                                  data=json.dumps(request),
                                  content_type='application/json')
-        self.assertEqual(response.status_code, 201) '''
+        self.assertEqual(response.status_code, 201)
 
-    def test_modify_request(self):
+    ''' def test_modify_request(self):
         request = {"description":"New Description"}
         response = self.app.put(BASE_URL+"/2",
                                 data=json.dumps(request),
                                 content_type='application/json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) '''
 
     def tearDown(self):
         # reset app.requests to initial state
