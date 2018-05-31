@@ -5,7 +5,6 @@ import json
 import apifunctions
 
 BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
-BAD_ITEM_URL = '{}/5'.format(BASE_URL)
 
 
 class TestApi(unittest.TestCase):
