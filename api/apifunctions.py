@@ -84,7 +84,7 @@ def get_all_requests(userid):
 @app.route('/api/v1/requests/<int:userid>/<int:requestid>', methods=['GET'])
 def get_particular_request(userid,requestid):
     if is_logged_in(userid):
-        particular_request = _get_request(id)
+        particular_request = _get_request(requestid)
     if not particular_request:
         abort(404)
     return jsonify({'request': particular_request})
@@ -114,7 +114,7 @@ def create_request():
 def modify_request(id):
     user_request = _get_request(id)
     if len(user_request) == 0:
-        abort(404)
+        abort(400)
     if not request.json:
         abort(400)
     title = request.json.get('title', user_requests[id]['title'])

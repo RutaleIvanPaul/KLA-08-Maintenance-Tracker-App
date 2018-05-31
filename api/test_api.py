@@ -24,12 +24,7 @@ class TestApi(unittest.TestCase):
 
     def test_create_request(self):
         #no missing values
-        user_request = {
-        'id': 5,
-        'userID':5,
-        'title': 'pc over heat',
-        'description':'pc over heats even on low activity'
-    }
+        user_request = {'id': 5,'userID':5,'title': 'pc over heat','description':'pc over heats even on low activity'}
         response = self.app.post(BASE_URL,
                                  data=json.dumps(user_request),
                                  content_type='application/json')
