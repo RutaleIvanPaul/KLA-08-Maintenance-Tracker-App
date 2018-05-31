@@ -94,13 +94,16 @@ def create_request():
     if not request.json or 'title' not in request.json or 'description' not in request.json:
         abort(400)
     request_id = requests[-1].get("id") + 1
+    userID = request.json.get('userID')
     title = request.json.get('title')
+    description = request.json.get('description')
+
     if _record_exists(title):
         abort(400)
-    description = request.json.get('description')
+
     if type(description) is int:
         abort(400)
-    request = {"id": request_id, "title": title,
+    request = {"id": request_id,"userID":userID, "title": title,
             "description": description}
     requests.append(request)
     return jsonify({'request': request}), 201
