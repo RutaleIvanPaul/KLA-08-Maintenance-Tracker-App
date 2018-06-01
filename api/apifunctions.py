@@ -5,6 +5,7 @@ BAD_REQUEST = 'Bad request'
 
 app = Flask(__name__)
 
+#create list of users
 users = [
     {
         'userID':1,
@@ -24,8 +25,10 @@ users = [
     }
 ]
 
+#logged in users
 loggedIn = [2,4]
 
+#user requests
 user_requests = [
     {
         'id': 1,
@@ -49,15 +52,19 @@ user_requests = [
 
 
 def _get_request(id):
+    '''Get user request basing on request id'''
     return [user_request for user_request in user_requests if user_request['id'] == id]
 
 def _get_all_user_requests(userID):
+    '''Get user requests basing on user id'''
     return [user_request for user_request in user_requests if user_request['userID'] == userID]
 
 def _record_exists(title):
+    '''Check whether request exists'''
     record = [user_request for user_request in user_requests if user_request["title"] == title]
 
 def is_logged_in(id):
+    '''Check if user is logged in'''
     if id in loggedIn:
         return True
     else:
@@ -65,16 +72,19 @@ def is_logged_in(id):
 
 @app.errorhandler(404)
 def not_found(error):
+    '''Customised error message for 404 status code'''
     return make_response(jsonify({'error': NOT_FOUND}), 404)
 
 
 @app.errorhandler(400)
 def bad_request(error):
+    '''Customised error message for 400 status code'''
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
 
 @app.route('/api/v1/requests/<int:userid>', methods=['GET'])
 def get_all_requests(userid):
+    '''Get all requests for given user id'''
     if is_logged_in(userid):
         logged_in_user_requests = _get_all_user_requests(userid)
         return jsonify({'requests': logged_in_user_requests}), 200
@@ -83,6 +93,7 @@ def get_all_requests(userid):
 
 @app.route('/api/v1/requests/<int:userid>/<int:requestid>', methods=['GET'])
 def get_particular_request(userid,requestid):
+    '''Get particular request for given user basing on request id'''
     if is_logged_in(userid):
         particular_request = _get_request(requestid)
     if not particular_request:
@@ -92,6 +103,7 @@ def get_particular_request(userid,requestid):
 
 @app.route('/api/v1/requests', methods=['POST'])
 def create_request():
+    '''Create new user request'''
     if not request.json or 'title' not in request.json or 'description' not in request.json:
         abort(400)
     user_request_id = user_requests[-1].get("id") + 1
@@ -112,6 +124,7 @@ def create_request():
 
 @app.route('/api/v1/requests/<int:id>', methods=['PUT'])
 def modify_request(id):
+    '''Modify existing request'''
     user_request = _get_request(id)
     if len(user_request) == 0:
         abort(400)
