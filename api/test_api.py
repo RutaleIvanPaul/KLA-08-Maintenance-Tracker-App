@@ -13,6 +13,11 @@ class TestApi(unittest.TestCase):
         self.app = apifunctions.app.test_client()
         self.backup_requests = deepcopy(apifunctions.user_requests)  # no references!
         self.app.testing = True
+        
+    
+    def test_URL_exists(self):
+        response = self.app.get(BASE_URL)
+        self.assertEqual(response.status_code, 200)
     
     def test_get_requests(self):
         response = self.app.get(BASE_URL+"/2")
