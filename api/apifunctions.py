@@ -61,7 +61,7 @@ def _get_all_user_requests(userID):
 
 def _record_exists(title):
     '''Check whether request exists'''
-    record = [user_request for user_request in user_requests if user_request["title"] == title]
+    return [user_request for user_request in user_requests if user_request['title'] == title]
 
 def is_logged_in(id):
     '''Check if user is logged in'''
@@ -114,8 +114,12 @@ def create_request():
     if _record_exists(title):
         abort(400)
 
-    if type(description) is int:
+    if type(title) is not str:
         abort(400)
+    
+    if type(description) is not str:
+        abort(400)
+        
     user_request = {"id": user_request_id,"userID":userID, "title": title,
             "description": description}
     user_requests.append(request)
@@ -128,14 +132,25 @@ def modify_request(id):
     user_request = _get_request(id)
     if len(user_request) == 0:
         abort(400)
+
     if not request.json:
         abort(400)
-    title = request.json.get('title', user_requests[id]['title'])
-    description = request.json.get('description', user_requests[id]['description'])
-    if type(description) is int:
-        abort(400)
-    user_requests[id]['title'] = title
-    user_requests[id]['description'] = description
+
+    title = request.json.get('title')
+    description = request.json.get('description')
+
+    if title:
+        if type(title) is not str:
+            abort(400)
+        else:
+            user_requests[id]['title'] = title
+    
+    if description:
+        if type(description) is not str:
+            abort(400)
+        else:
+            user_requests[id]['description'] = description
+
     return jsonify({'request': user_requests[id]}), 200
 
 
