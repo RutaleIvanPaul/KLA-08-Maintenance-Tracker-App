@@ -2,7 +2,7 @@ from copy import deepcopy
 import unittest
 import json
 
-import apifunctions
+from api import apifunctions
 
 BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 
