@@ -4,9 +4,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - pip install python-coveralls
 # command to run tests
 script:
-  - pytest api/test_api.py 
+  - nosetests --with-coverage
 
 # push report to coveralls.io
 after_success:

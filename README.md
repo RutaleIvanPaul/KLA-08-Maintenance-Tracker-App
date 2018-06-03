@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App.svg?branch=feature-initial)](https://travis-ci.org/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App)
-[![Coverage Status](https://coveralls.io/repos/github/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App/badge.svg?branch=master)](https://coveralls.io/github/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App/badge.svg)](https://coveralls.io/github/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bf4c255679767e0d9d77/maintainability)](https://codeclimate.com/github/RutaleIvanPaul/KLA-08-Maintenance-Tracker-App/maintainability)
 # KLA-08-Maintenance-Tracker-App
 Maintenance Tracker App is an application that provides users with the ability to reach out to operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
 
