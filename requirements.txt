@@ -19,7 +19,6 @@ pipenv==2018.5.18
 pluggy==0.6.0
 py==1.5.3
 pycodestyle==2.4.0
-pytest==3.6.0
 requests==2.18.4
 six==1.11.0
 urllib3==1.22
