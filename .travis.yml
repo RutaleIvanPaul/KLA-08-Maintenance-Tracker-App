@@ -9,6 +9,7 @@ install:
 # command to run tests
 script:
   - pytest api/test_api.py 
+  - nosetests --with-coverage
 
 # push report to coveralls.io
 after_success:
