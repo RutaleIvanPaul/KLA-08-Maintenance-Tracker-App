@@ -1,1 +1,1 @@
-web: gunicorn --chdir api apifunctions:app
+web: gunicorn apifunctions:app
