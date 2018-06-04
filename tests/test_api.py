@@ -2,7 +2,7 @@ from copy import deepcopy
 import unittest
 import json
 
-from api import apifunctions
+from api import views
 
 BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 
@@ -10,8 +10,8 @@ BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 class TestApi(unittest.TestCase):
 
     def setUp(self):
-        self.app = apifunctions.app.test_client()
-        self.backup_requests = deepcopy(apifunctions.user_requests)  # no references!
+        self.app = views.app.test_client()
+        self.backup_requests = deepcopy(views.user_requests)  # no references!
         self.app.testing = True
         
     
@@ -94,7 +94,7 @@ class TestApi(unittest.TestCase):
 
     def tearDown(self):
         # reset app.requests to initial state
-        apifunctions.user_requests = self.backup_requests
+        views.user_requests = self.backup_requests
 
 
 if __name__ == "__main__":
