@@ -85,7 +85,3 @@ def modify_request(id):
             Request._modify_request(id,'description',description)
 
     return jsonify({'request': "Successfully modified"}), 200
-
-
-# if __name__ == '__main__':
-#     app.run(host="localhost", port=8085, debug=True)
