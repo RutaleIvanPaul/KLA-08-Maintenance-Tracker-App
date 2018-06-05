@@ -29,7 +29,17 @@ class Request():
     @staticmethod
     def _record_exists(title):
         '''Check whether request exists'''
-        return [user_request for user_request in user_requests if user_request.title == title]
+        return conn.genericSelectQuery('request',"title='"+title+"'")
+
+    @staticmethod
+    def _create_request(userid,title,description):
+        '''Post new request into the database'''
+        conn.InsertQueryforRequest(userid,title,description)
+
+    @staticmethod
+    def _modify_request(requestid,field,newinput):
+        '''Modify a request basing on given field'''
+        conn.genericUpdateQueryforRequest(requestid,field,newinput)
 
 
     def __repr__(self):

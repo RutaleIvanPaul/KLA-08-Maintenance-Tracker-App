@@ -50,9 +50,13 @@ class DatabaseConnection():
         insertQuery = "INSERT INTO public.user (email,password,type,status) VALUES ('"+email+"','"+password+"','"+usertype+"','"+status+"')"
         self.cursor.execute(insertQuery)
 
-    def InsertQueryforRequest(self,userid,title,description,status):
+    def InsertQueryforRequest(self,userid,title,description,status='pending'):
         insertQuery = "INSERT INTO public.request (userid,title,description,status) VALUES ('"+userid+"','"+title+"','"+description+"','"+status+"')"
         self.cursor.execute(insertQuery)
+
+    def genericUpdateQueryforRequest(self,requestid,field,newinput):
+        updateQuery = "UPDATE public.request SET "+field+" = '"+newinput+"' WHERE id="+str(requestid)
+        self.cursor.execute(updateQuery)
 
 
 # if __name__ =='__main__':

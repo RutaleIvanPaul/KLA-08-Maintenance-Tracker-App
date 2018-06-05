@@ -32,63 +32,59 @@ def get_all_requests(userid):
 def get_particular_request(userid,requestid):
     '''Get particular request for given user basing on request id'''
     if User.is_logged_in(userid):
-        particular_request = User._get_request(requestid)
+        particular_request = Request._get_request(requestid)
     if not particular_request:
         abort(404)
     return jsonify({'request': particular_request})
 
 
-# @app.route('/api/v1/requests', methods=['POST'])
-# def create_request():
-#     '''Create new user request'''
-#     if not request.json or 'title' not in request.json or 'description' not in request.json:
-#         abort(400)
-#     user_request_id = user_requests[-1].get("id") + 1
-#     userID = request.json.get('userID')
-#     title = request.json.get('title')
-#     description = request.json.get('description')
+@app.route('/api/v1/requests', methods=['POST'])
+def create_request():
+    '''Create new user request'''
+    if not request.json or 'title' not in request.json or 'description' not in request.json:
+        abort(400)
 
-#     if _record_exists(title):
-#         abort(400)
+    userID = request.json.get('userID')
+    title = request.json.get('title')
+    description = request.json.get('description')
 
-#     if type(title) is not str:
-#         abort(400)
+    if type(title) is not str:
+        return make_response(jsonify({'error': BAD_REQUEST+":Title should be a string" }), 400)
     
-#     if type(description) is not str:
-#         abort(400)
-        
-#     user_request = {"id": user_request_id,"userID":userID, "title": title,
-#             "description": description}
-#     user_requests.append(request)
-#     return jsonify({'request': user_request}), 201
+    if type(description) is not str:
+        return make_response(jsonify({'error': BAD_REQUEST+":Description should be a string" }), 400)
+
+    if Request._record_exists(title):
+        return make_response(jsonify({'error': BAD_REQUEST+":Request already exists" }), 400)
+
+    Request._create_request(str(userID),title,description)
+    user_request = {"userID":userID, "title": title,
+                "description": description}
+    return jsonify({'request': user_request}), 201
 
 
-# @app.route('/api/v1/requests/<int:id>', methods=['PUT'])
-# def modify_request(id):
-#     '''Modify existing request'''
-#     user_request = _get_request(id)
-#     if len(user_request) == 0:
-#         abort(400)
+@app.route('/api/v1/requests/<int:id>', methods=['PUT'])
+def modify_request(id):
+    '''Modify existing request'''
+    if not request.json:
+         return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON" }), 400)
 
-#     if not request.json:
-#         abort(400)
+    title = request.json.get('title')
+    description = request.json.get('description')
 
-#     title = request.json.get('title')
-#     description = request.json.get('description')
-
-#     if title:
-#         if type(title) is not str:
-#             abort(400)
-#         else:
-#             user_requests[id]['title'] = title
+    if title:
+        if type(title) is not str:
+            return make_response(jsonify({'error': BAD_REQUEST+":Title should be a string" }), 400)
+        else:
+            Request._modify_request(id,'title',title)
     
-#     if description:
-#         if type(description) is not str:
-#             abort(400)
-#         else:
-#             user_requests[id]['description'] = description
+    if description:
+        if type(description) is not str:
+            return make_response(jsonify({'error': BAD_REQUEST+":Description should be a string" }), 400)
+        else:
+            Request._modify_request(id,'description',description)
 
-#     return jsonify({'request': user_requests[id]}), 200
+    return jsonify({'request': "Successfully modified"}), 200
 
 
 # if __name__ == '__main__':
