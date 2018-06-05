@@ -57,17 +57,3 @@ class DatabaseConnection():
     def genericUpdateQueryforRequest(self,requestid,field,newinput):
         updateQuery = "UPDATE public.request SET "+field+" = '"+newinput+"' WHERE id="+str(requestid)
         self.cursor.execute(updateQuery)
-
-
-# if __name__ =='__main__':
-#     conn = DatabaseConnection()
-    # conn.createTableUser()
-    # conn.createTableRequest()
-    # conn.genericInsertQueryforUser()
-    # print(conn.genericSelectQuery('user','id=2'))
-    # conn.InsertQueryforUser('ess@l.l','password','user','loggedin')
-    # conn.InsertQueryforRequest('2','Phone Blacked','Phone Cannot turn on','pending')
-    # x=0
-    # while(x<10):
-    #     conn.InsertQueryforUser("useremail"+str(x),"password"+str(x),"user","loggedin")
-    #     x=x+1
