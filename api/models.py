@@ -67,17 +67,3 @@ class User():
         if (conn.genericSelectQuery("user","id="+str(id)+" AND status='loggedin'")):
             return True
 
-    
-
-
-#create list of users
-users = [User(1,'Ivan','admin','loggedin'),User(2,'Paul','user','loggedout'),User(3,'Ruts','user','loggedin')]
-
-#logged in users
-loggedIn = [2,4]
-
-#user requests
-user_requests = [Request(1,2,'laptop screen','the screen just suddenly blacked out','pending'),
-                    Request(2,1,'phone screen cracked','the phone fell down','approved'),
-                    Request(3,3,'pc over heat','pc over heats even on low activity','rejected')]
-   
