@@ -2,7 +2,7 @@ from copy import deepcopy
 import unittest
 import json
 
-from api import views
+from api import app, views
 
 BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 
@@ -10,7 +10,7 @@ BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 class TestApi(unittest.TestCase):
 
     def setUp(self):
-        self.app = views.app.test_client()
+        self.app = app.test_client()
         self.backup_requests = deepcopy(views.user_requests)  # no references!
         self.app.testing = True
         
@@ -28,7 +28,7 @@ class TestApi(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_create_request(self):
-        user_request = {'id': 6,'userID':5,'title': 'new request','description':'pc over heats even on low activity'}
+        user_request = {'id': 6,'userID':5,'title': 'new request','description':'pc over heats on low activity'}
         response = self.app.post(BASE_URL,
                                  data=json.dumps(user_request),
                                  content_type='application/json')

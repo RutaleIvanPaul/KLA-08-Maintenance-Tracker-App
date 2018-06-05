@@ -1,9 +1,8 @@
-from flask import Flask, jsonify, abort, make_response, request
+from flask import jsonify, abort, make_response, request
+from api import app
 
 NOT_FOUND = 'Not found'
 BAD_REQUEST = 'Bad request'
-
-app = Flask(__name__)
 
 #create list of users
 users = [
@@ -154,5 +153,5 @@ def modify_request(id):
     return jsonify({'request': user_requests[id]}), 200
 
 
-if __name__ == '__main__':
-    app.run(host="localhost", port=8085, debug=True)
+# if __name__ == '__main__':
+#     app.run(host="localhost", port=8085, debug=True)
