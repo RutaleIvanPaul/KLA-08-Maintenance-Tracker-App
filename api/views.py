@@ -18,8 +18,8 @@ def bad_request(error):
     '''Customised error message for 400 status code'''
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
-# @app.route('/api/v1/requests', methods=['POST'])
-# def signup():
+@app.route('/api/v1/requests', methods=['POST'])
+def signup():
 
 @app.route('/api/v1/requests/<int:userid>', methods=['GET'])
 def get_all_requests(userid):
