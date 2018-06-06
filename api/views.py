@@ -18,8 +18,24 @@ def bad_request(error):
     '''Customised error message for 400 status code'''
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
-@app.route('/api/v1/requests', methods=['POST'])
+@app.route('/api/v1/auth/signup', methods=['POST'])
 def signup():
+    '''Add new user to database'''
+    if not request.json:
+         return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON" }), 400)
+
+    User.createUser(request.json.get('email'),request.json.get('password'),request.json.get('usertype'))  
+    return jsonify({'request': "Successfully Added User"}), 200
+
+@app.route('/api/v1/auth/login', methods=['POST'])
+def login():
+    '''Add new user to database'''
+    if not request.json:
+         return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON" }), 400)
+
+    if User.login(request.json.get('email'),request.json.get('password')):
+        return jsonify({'request': "Successfully Logged In"}), 200
+    
 
 @app.route('/api/v1/requests/<int:userid>', methods=['GET'])
 def get_all_requests(userid):

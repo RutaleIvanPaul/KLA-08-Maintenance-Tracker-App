@@ -65,6 +65,17 @@ class User():
         }
 
     @staticmethod
+    def createUser(email,password,usertype):
+        conn.InsertQueryforUser(email,password,usertype)
+
+
+    @staticmethod
+    def login(email,password):
+        if(conn.genericSelectQuery("user","email='"+email+"' AND password='"+password+"'")):
+            conn.genericUpdateQueryforUser(email,password,"status","loggedin")
+            return True
+
+    @staticmethod
     def is_logged_in(id):
         '''Check if user is logged in'''
         if (conn.genericSelectQuery("user","id="+str(id)+" AND status='loggedin'")):

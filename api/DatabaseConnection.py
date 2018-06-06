@@ -57,3 +57,7 @@ class DatabaseConnection():
     def genericUpdateQueryforRequest(self,requestid,field,newinput):
         updateQuery = "UPDATE public.request SET "+field+" = '"+newinput+"' WHERE id="+str(requestid)
         self.cursor.execute(updateQuery)
+
+    def genericUpdateQueryforUser(self,email,password,field,newinput):
+        updateQuery = "UPDATE public.user SET "+field+" = '"+newinput+"' WHERE email='"+email+"'AND password='"+password+"'"
+        self.cursor.execute(updateQuery)
