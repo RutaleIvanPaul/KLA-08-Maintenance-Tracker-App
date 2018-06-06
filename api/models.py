@@ -19,7 +19,10 @@ class Request():
     @staticmethod
     def _get_request(id):
         '''Get user request basing on request id'''
-        return conn.genericSelectQuery('request','id='+str(id))
+        if id == "get_all":
+            return conn.genericSelectQuery('request','true')
+        else:
+            return conn.genericSelectQuery('request','id='+str(id))
 
     @staticmethod
     def _get_all_user_requests(userID):

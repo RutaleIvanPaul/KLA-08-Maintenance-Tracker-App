@@ -18,6 +18,8 @@ def bad_request(error):
     '''Customised error message for 400 status code'''
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
+# @app.route('/api/v1/requests', methods=['POST'])
+# def signup():
 
 @app.route('/api/v1/requests/<int:userid>', methods=['GET'])
 def get_all_requests(userid):
@@ -36,6 +38,11 @@ def get_particular_request(userid,requestid):
     if not particular_request:
         abort(404)
     return jsonify({'request': particular_request})
+
+@app.route('/api/v1/requests', methods=['GET'])
+def get_all_requests_on_application():
+    '''Get all requests from the database'''
+    return jsonify({'request': Request._get_request('get_all')})
 
 
 @app.route('/api/v1/requests', methods=['POST'])
@@ -85,3 +92,14 @@ def modify_request(id):
             Request._modify_request(id,'description',description)
 
     return jsonify({'request': "Successfully modified"}), 200
+
+
+@app.route('/api/v1/requests/<int:id>/<string:status>', methods=['PUT'])
+def change_request_status(id,status):
+    if status=="approve" or status=="resolve" or status == "disapprove":
+        Request._modify_request(id,'status',status)
+        return jsonify({'request': "Successfully modified"}), 200
+    else:
+        return make_response(jsonify({'error': BAD_REQUEST+":Keyword supplied for this endpoint is wrong" }), 400)
+
+    
