@@ -1,19 +1,24 @@
 # from copy import deepcopy
 import unittest
 import json
-
-from api import app, views
+from api import app 
+from api.DatabaseConnection import DatabaseConnection
 
 BASE_URL = 'http://127.0.0.1:8085/api/v1/requests'
 
 
 class TestApi(unittest.TestCase):
 
+    def create_app(self):
+        return app
+
     def setUp(self):
         self.app = app.test_client()
-        self.backup_requests = deepcopy(views.user_requests)  # no references!
+        # self.backup_requests = deepcopy(views.user_requests)  # no references!
         self.app.testing = True
-        
+        self.conn = DatabaseConnection()
+        self.conn.createTestTableRequest()
+        self.conn.createTestTableUser()
     
     def test_request_not_exist(self):
         response = self.app.get(BASE_URL+"/5")
@@ -93,8 +98,9 @@ class TestApi(unittest.TestCase):
         
 
     def tearDown(self):
+        
         # reset app.requests to initial state
-        views.user_requests = self.backup_requests
+        # views.user_requests = self.backup_requests
 
 
 if __name__ == "__main__":

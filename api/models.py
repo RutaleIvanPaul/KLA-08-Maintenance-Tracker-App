@@ -1,4 +1,5 @@
 from .DatabaseConnection import DatabaseConnection
+from werkzeug.security import generate_password_hash, check_password_hash
 conn = DatabaseConnection()
 class Request():
     def __init__(self,id,userID,title,description,status):
@@ -35,9 +36,10 @@ class Request():
         return conn.genericSelectQuery('request',"title='"+title+"'")
 
     @staticmethod
-    def _create_request(userid,title,description):
+    def _create_request(current_user,title,description):
         '''Post new request into the database'''
-        conn.InsertQueryforRequest(userid,title,description)
+        conn.InsertQueryforRequest(current_user,title,description)
+        return conn.genericSelectQuery("request",'userid='+str(current_user))[-1]
 
     @staticmethod
     def _modify_request(requestid,field,newinput):
@@ -55,14 +57,14 @@ class User():
         self.password = password
         self.type = usertype
         self.status = status
+    
+    @staticmethod
+    def getUser(userid):
+        return conn.genericSelectQuery("user","id="+str(userid))
 
-    def getUser(self):
-        return {
-        'userID':self.userID,
-        'username':self.username,
-        'type':self.usertype,
-        'status':self.status
-        }
+    @staticmethod
+    def getUserbyEmail(email):
+        return conn.genericSelectQuery("user","email='"+email+"'")
 
     @staticmethod
     def createUser(email,password,usertype):
@@ -70,11 +72,18 @@ class User():
 
 
     @staticmethod
-    def login(email,password):
-        if(conn.genericSelectQuery("user","email='"+email+"' AND password='"+password+"'")):
-            conn.genericUpdateQueryforUser(email,password,"status","loggedin")
+    def login(userid,password):
+        row = conn.genericSelectQuery("user","id="+str(userid))[0]
+        if(check_password_hash(row["password"],password)):
+            conn.genericUpdateQueryforUser(userid,"status","loggedin")
             return True
 
+    @staticmethod
+    def logout(current_user,logout):
+        conn.genericUpdateQueryforUser(current_user,"status","loggedout")
+        return True
+
+    
     @staticmethod
     def is_logged_in(id):
         '''Check if user is logged in'''
