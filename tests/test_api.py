@@ -60,6 +60,19 @@ class TestAPI(TestCase):
             self.assertIsNotNone(data["token"])
             self.assertEqual(response.status_code, 200)
 
+    def test_login_invalid_email(self):
+        with self.client:
+            response = self.client.post(
+                'api/v1/auth/login',
+                data=json.dumps({
+                    "email": "test@user3",
+                    "password": "password"
+                }),
+                content_type='application/json'
+            )
+            data = json.loads(response.data.decode('utf8'))
+            self.assertEqual(response.status_code, 400)
+
     def test_create_request(self):
         with self.client:
             headers = {"x-access-token":self.user_data["token"]}

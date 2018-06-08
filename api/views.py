@@ -94,6 +94,9 @@ def login():
 	if not request.json:
 		return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON" }), 400)
 
+	if not validate_email(request.json.get('email')):
+		return make_response(jsonify({'error': BAD_REQUEST+":Invalid Email" }), 400)
+
 	if User.getUserbyEmail(request.json.get('email')):
 		userid = User.getUserbyEmail(request.json.get('email'))[0]["id"]
 		if User.login(userid,request.json.get('password')):
@@ -158,8 +161,11 @@ def create_request(current_user):
 	if not check_string(description):
 		return make_response(jsonify({'error': BAD_REQUEST+":Description should be a string" }), 400)
 
-	if check_string_length(title) or check_string_length(description):
-		return make_response(jsonify({'error': BAD_REQUEST+":One of your entries appears to be empty" }), 400)
+	if not check_string_length(title):
+		return make_response(jsonify({'error': BAD_REQUEST+":Your title appears to be empty" }), 400)
+
+	if not check_string_length(description):
+		return make_response(jsonify({'error': BAD_REQUEST+":Your description appears to be empty" }), 400)
 
 	user_request = Request._create_request(current_user,title,description)
 
