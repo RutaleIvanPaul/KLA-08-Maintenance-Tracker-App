@@ -2,6 +2,7 @@ from .DatabaseConnection import DatabaseConnection
 from werkzeug.security import generate_password_hash, check_password_hash
 conn = DatabaseConnection()
 class Request():
+    #Class to model the behaviour of a request
     def __init__(self,id,userID,title,description,status):
         self.id = id
         self.userID = userID
@@ -51,6 +52,7 @@ class Request():
         return 'the string is {} {} {} {}  '.format(self.id,self.userID,self.title,self.description)
     
 class User():
+    #Class to model the behaviour of a User
     def __init__(self,userID,username,usertype,status,password=None):
         self.userID = userID
         self.username = username
@@ -60,19 +62,23 @@ class User():
     
     @staticmethod
     def getUser(userid):
+        '''Get the user basing on userid'''
         return conn.genericSelectQuery("user","id="+str(userid))
 
     @staticmethod
     def getUserbyEmail(email):
+        '''Get the user basing on email'''
         return conn.genericSelectQuery("user","email='"+email+"'")
 
     @staticmethod
     def createUser(email,password,usertype):
+        '''Create User when given email, password and usertype'''
         conn.InsertQueryforUser(email,password,usertype)
 
 
     @staticmethod
     def login(userid,password):
+        '''Change user status to logged in'''
         row = conn.genericSelectQuery("user","id="+str(userid))[0]
         if(check_password_hash(row["password"],password)):
             conn.genericUpdateQueryforUser(userid,"status","loggedin")
@@ -80,6 +86,7 @@ class User():
 
     @staticmethod
     def logout(current_user,logout):
+        '''change user status to logged out'''
         conn.genericUpdateQueryforUser(current_user,"status","loggedout")
         return True
 

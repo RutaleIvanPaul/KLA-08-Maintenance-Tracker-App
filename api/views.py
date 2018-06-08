@@ -16,34 +16,30 @@ BAD_REQUEST = 'Bad request'
 app.config['SECRET KEY'] = 'thissecretkey'
 
 def check_string(stringparam):
+	'''Check if param is really a string'''
 	if type(stringparam) is str:
 		return True
 	else:
 		return False 
 
 def check_string_length(stringparam):
-	if len(stringparam)<1:
+	'''Check if param is an empty string'''
+	if len(stringparam.strip())<1:
 		return False
 	else:
 		return True
 
 def token_required(f):
+	'''Wraps around methods that will require a token'''
 	@wraps(f)
 	def decorated(*args, **kwargs):
 		token = None
-
-		if 'x-access-token' in request.headers:
+		if 'x-access-token' in request.headers: #Check if request is authorised. 
 			token = request.headers['x-access-token']
-
-		# data = jwt.decode(token, str(app.config['SECRET_KEY']))
-		# print("This"+str(data["userid"]))
-		# userid = str(data["userid"])
-		# current_user = User.getUser(userid)[0]["id"]
-
 		try:
-			data = jwt.decode(token, str(app.config['SECRET_KEY']))
-			userid = str(data["userid"])
-			current_user = User.getUser(userid)[0]["id"]
+			data = jwt.decode(token, str(app.config['SECRET_KEY']))#Decode the data held by token
+			userid = str(data["userid"])#retrieve the user id
+			current_user = User.getUser(userid)[0]["id"]#Check for that user from the database
 		except:
 			return jsonify({'message': 'Token is invalid/Has Expired.'})
 		return f(current_user,*args,**kwargs)
@@ -63,14 +59,23 @@ def bad_request(error):
 @app.route('/api/v1/auth/signup', methods=['POST'])
 def signup():
 	'''Add new user to database'''
-	if not request.json:
-		return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON" }), 400)
+	if not request.json or not request.json.get('email') or not request.json.get('password') or not request.json.get('usertype'):
+		return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON/Missing a value" }), 400)
 
 	if not validate_email(request.json.get('email')):
 		return make_response(jsonify({'error': BAD_REQUEST+":Invalid Email" }), 400)
 
-	# if len(request.json.get('email')) < 1 or len(request.json.get('password') < 1 or len(request.json.get('usertype') < 1):
-	# 	return make_response(jsonify({'error': BAD_REQUEST+":One of the needed fields is empty" }), 400)
+	if not check_string_length(request.json.get('email')):
+		return make_response(jsonify({'error': BAD_REQUEST+":email field is empty" }), 400)
+
+	if not check_string_length(request.json.get('password')):
+		return make_response(jsonify({'error': BAD_REQUEST+":Password field is empty" }), 400)
+
+	if not check_string_length(request.json.get('usertype')):
+		return make_response(jsonify({'error': BAD_REQUEST+":Usertype field is empty" }), 400)
+
+	if request.json.get('usertype') != "admin" and request.json.get('usertype') != "user":
+		return make_response(jsonify({'error': BAD_REQUEST+":Usertype should either be user or admin" }), 400)
 
 	try:
 		User.createUser(request.json.get('email'),generate_password_hash(request.json.get('password')),request.json.get('usertype'))
@@ -83,6 +88,7 @@ def signup():
 @app.route('/api/v1/auth/logout', methods=['POST'])
 @token_required
 def logout(current_user):
+	'''Change current user status to logged out'''
 	if User.logout(current_user,"loggedout"):
 		return jsonify({'request': "Successfully Logged Out"}), 200
 
@@ -91,15 +97,16 @@ def logout(current_user):
 
 @app.route('/api/v1/auth/login', methods=['POST'])
 def login():
-	if not request.json:
-		return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON" }), 400)
+	'''Change user status to logged in'''
+	if not request.json or not request.json.get('email') or not request.json.get('password'):
+		return make_response(jsonify({'error': BAD_REQUEST+":Request object is not JSON/Missing a value" }), 400)
 
-	if not validate_email(request.json.get('email')):
+	if not validate_email(request.json.get('email')):#Validate the input email
 		return make_response(jsonify({'error': BAD_REQUEST+":Invalid Email" }), 400)
 
-	if User.getUserbyEmail(request.json.get('email')):
+	if User.getUserbyEmail(request.json.get('email')):#Check for user basing on email
 		userid = User.getUserbyEmail(request.json.get('email'))[0]["id"]
-		if User.login(userid,request.json.get('password')):
+		if User.login(userid,request.json.get('password')):#Check for user basing on password
 			token = jwt.encode({'userid': userid, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, str(app.config['SECRET_KEY']))
 			return jsonify({'token' : token.decode('UTF-8')}), 200
 		else:
@@ -113,6 +120,7 @@ def login():
 def get_all_requests(current_user):
 	'''Get all requests for given user id'''
 	if User.is_logged_in(current_user):
+		#return all logged in user requests
 		logged_in_user_requests = Request._get_all_user_requests(current_user)
 		return jsonify({'requests': logged_in_user_requests}), 200
 	else:
@@ -124,6 +132,7 @@ def get_particular_request(current_user,requestid):
 	'''Get particular request for given user basing on request id'''
 	if User.is_logged_in(current_user):
 		particular_request = Request._get_request(requestid)
+		#Return Particular request
 	if not particular_request:
 		abort(404)
 	if particular_request[0]["userid"] == current_user:
@@ -131,11 +140,12 @@ def get_particular_request(current_user,requestid):
 	else:
 		return make_response(jsonify({'error': BAD_REQUEST+":This user did not make the request" }), 400)
 
-@app.route('/api/v1/requests', methods=['GET'])
+@app.route('/api/v1/requests/', methods=['GET'])
 @token_required
 def get_all_requests_on_application(current_user):
 	'''Get all requests from the database'''
 	if User.getUser(current_user)[0]["type"] == "admin":
+		#Get all requests from the database
 		return jsonify({'request': Request._get_request('get_all')})
 	else:
 		return make_response(jsonify({'error': BAD_REQUEST+":This user is not an admin" }), 400)
@@ -219,8 +229,11 @@ def change_request_status(current_user,requestid,status):
 				return make_response(jsonify({'error': BAD_REQUEST+":Request status is not pending" }), 400)
 
 		if status == "disapprove" or status == "resolve":
-			Request._modify_request(requestid,'status',status+"d")
-			return jsonify({'request': "Successfully modified"}), 200
+			if Request._get_request(requestid)[0]["status"] == "pending" or Request._get_request(requestid)[0]["status"] == "approved":
+				Request._modify_request(requestid,'status',status+"d")
+				return jsonify({'request': "Successfully modified"}), 200
+			else:
+				return make_response(jsonify({'error': BAD_REQUEST+":Request is not at pending or approved status." }), 400)
 
 		else:
 			return make_response(jsonify({'error': BAD_REQUEST+":Keyword supplied for this endpoint is wrong" }), 400)
