@@ -3,3 +3,6 @@ venv/
 __pycache__/
 ../.vscode/
 .vscode
+.pyc
+api/.pyc
+tests/.pyc
