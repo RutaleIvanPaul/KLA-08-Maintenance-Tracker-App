@@ -115,11 +115,12 @@ def login():
     # Check for user basing on email
     if User.getUserbyEmail(request.json.get('email')):
         userid = User.getUserbyEmail(request.json.get('email'))[0]["id"]
+        usertype = User.getUserbyEmail(request.json.get('email'))[0]["type"]
         # Check for user basing on password
         if User.login(userid, request.json.get('password')):
             token = jwt.encode({'userid': userid, 'exp': datetime.datetime.utcnow(
             ) + datetime.timedelta(minutes=120)}, str(app.config['SECRET_KEY']))
-            return jsonify({'token': token.decode('UTF-8')}), 200
+            return jsonify({'token': token.decode('UTF-8'),'type':usertype}), 200
         else:
             return make_response(jsonify({'error': BAD_REQUEST+":Wrong Password"}), 400)
     else:
